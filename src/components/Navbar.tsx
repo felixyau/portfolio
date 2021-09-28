@@ -178,11 +178,9 @@ export const Navbar: React.FC = () => {
           </MaterialLink>
         </Grid>
         <Grid item>
-          <MaterialLink href="https://github.com/felixyau">
-            <IconButton>
+            <IconButton disabled>
               <MailOutline />
             </IconButton>
-          </MaterialLink>
         </Grid>
       </Grid>
     </Grid>
