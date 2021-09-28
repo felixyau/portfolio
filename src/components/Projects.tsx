@@ -76,7 +76,7 @@ export const Projects: React.FC = () => {
               ></img>
             </Box>
           </Project>
-          <Project url="" justify="flex-end" hoverTxt="Text-based RPG">
+          <Project url="https://github.com/felixyau/coRPG" justify="flex-end" hoverTxt="Text-based RPG">
             <Box width="100%" height="100%">
               <img
                 style={{ objectFit: "cover", width: "100%", height: "100%" }}

@@ -8,17 +8,24 @@ import {
   Tabs,
   Tab,
   Link as MaterialLink,
+  Modal,
 } from "@material-ui/core";
+import { styled } from "@material-ui/styles";
 import React, { createRef, useRef, useState } from "react";
-import { GitHub, MailOutline } from "@material-ui/icons";
+import { GitHub, MailOutline, Menu } from "@material-ui/icons";
 import IconButton from "@material-ui/core/IconButton";
 import { Link, useLocation } from "react-router-dom";
+import { MobileNavbar } from "./MobileNavbar";
+import { ModalUnstyled } from "@mui/core";
 
 export const Navbar: React.FC = () => {
-  const matches = useMediaQuery("(min-width:600px)");
+  const matches = useMediaQuery("(min-width:800px)");
   const useStyles = makeStyles({
     mobileOnly: {
-      display: matches ? "none" : "block",
+      display: matches ? "none" : "flex",
+    },
+    desktopOnly: {
+      display: matches ? "flex" : "none",
     },
     container: {
       alignItems: "center",
@@ -32,14 +39,43 @@ export const Navbar: React.FC = () => {
       color: "#626567",
       textDecoration: "none",
       "&:hover": {
-        color: "black",
+        color: "#000000",
       },
     },
+    modal: {
+      position: "fixed",
+      zIndex: 100,
+      right: 0,
+      bottom: 0,
+      top: 0,
+      left: 0,
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      backgroundColor: "#FFFFFF",
+    },
+    modalItem: {
+      backgroundColor: "#FFFFFF",
+      width: 400,
+    },
   });
+
+  const Backdrop = styled(Box)(() => ({
+    zIndex: -1,
+    position: "fixed",
+    right: 0,
+    bottom: 0,
+    top: 0,
+    left: 0,
+    backgroundColor: "#FFFFFF",
+  }));
+
   const classes = useStyles();
   const ref = useRef(null);
   const route = "Projects"; //later add route
   const [value, setValue] = useState(-1);
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
   console.log("ref current:", ref.current);
 
   const handleChange = ({} = {}, newValue: number) => {
@@ -48,10 +84,16 @@ export const Navbar: React.FC = () => {
   const url = useLocation().pathname;
 
   return (
-    <Grid container item xs={10} justifyContent="space-between">
-      <Grid container className={classes.container} item sm={4} spacing={2}>
+    <Grid container item xs={10} justifyContent="center">
+      <Grid
+        container
+        className={`${classes.container} ${classes.desktopOnly}`}
+        item
+        sm={4}
+        spacing={2}
+      >
         <Grid item>
-          <Link style={{ textDecoration: "none", color:"black" }} to="/">
+          <Link style={{ textDecoration: "none", color: "black" }} to="/">
             <Box style={{ borderBottom: url === "/" ? "1px solid" : "" }}>
               <Button className={classes.buttons}>
                 <Typography className={classes.texts} variant="overline">
@@ -62,7 +104,7 @@ export const Navbar: React.FC = () => {
           </Link>
         </Grid>
         <Grid item>
-          <Link style={{ textDecoration: "none", color:"black" }} to="/about">
+          <Link style={{ textDecoration: "none", color: "black" }} to="/about">
             <Box style={{ borderBottom: url === "/about" ? "1px solid" : "" }}>
               <Button className={classes.buttons}>
                 <Typography className={classes.texts} variant="overline">
@@ -86,9 +128,9 @@ export const Navbar: React.FC = () => {
         container
         item
         className={classes.container}
-        xs={6}
+        xs={4}
         sm={4}
-        justifyContent="center"
+        justifyContent={matches ? "center" : "flex-start"}
       >
         <Link style={{ textDecoration: "none" }} to="/">
           <Typography
@@ -100,13 +142,31 @@ export const Navbar: React.FC = () => {
           </Typography>
         </Link>
       </Grid>
-      <Grid className={classes.mobileOnly} container item xs={6}>
-        <Typography variant="overline">Mobile NavBar</Typography>
+      <Grid
+        className={`${classes.mobileOnly} ${classes.container}`}
+        container
+        item
+        xs={5}
+        justifyContent="flex-end"
+      >
+        <IconButton onClick={() => setOpen(!open)}>
+          <Menu />
+        </IconButton>
+        <ModalUnstyled
+          BackdropComponent={Backdrop}
+          className={classes.modal}
+          open={open}
+          onClose={handleClose}
+        >
+          <Box className={classes.modalItem}>
+            <MobileNavbar setOpen={setOpen}/>
+          </Box>
+        </ModalUnstyled>
       </Grid>
       <Grid
         container
         item
-        className={classes.container}
+        className={`${classes.container} ${classes.desktopOnly}`}
         sm={4}
         justifyContent="flex-end"
       >
