@@ -10,12 +10,12 @@ import {
 } from "@material-ui/core";
 import { Navbar } from "./components/Navbar";
 import { Projects } from "./components/Projects";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, HashRouter, Route, Switch } from "react-router-dom";
 import { About } from "./components/About";
 
 const App: React.FC = () => {
   return (
-    <BrowserRouter>
+    <HashRouter basename="/">
     <Box mt={6}>
       <Grid container direction="column">
         <Grid item container>
@@ -39,7 +39,7 @@ const App: React.FC = () => {
           </Switch>
       </Grid>
     </Box>
-    </BrowserRouter>
+    </HashRouter>
   );
 };
 
