@@ -9,6 +9,9 @@ import {
 import { grey } from "@material-ui/core/colors";
 import React from "react";
 import { Project } from "./Project";
+import videoPlayer from "../../video-player.jpg";
+import matrix from "../../matrix.png";
+import socialMedia from "../../social-medias.jpg";
 
 export const Projects: React.FC = () => {
   const useStyles = makeStyles({
@@ -49,22 +52,39 @@ export const Projects: React.FC = () => {
           style={{ width: "100%" }}
         >
           <Project
-            imgUrl="../../video-player.jpg"
             hoverTxt="YouTube Mod"
             url="https://stupefied-hamilton-3b9146.netlify.app/"
-          ></Project>
+          >
+            <Box width="100%" height="100%">
+              <img
+                style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                src={videoPlayer}
+                alt="videoPlayer"
+              ></img>
+            </Box>
+          </Project>
           <Project
             justify="center"
-            imgUrl="../../social-medias.jpg"
             hoverTxt="Instagram Clone"
             url="https://redditclone-seven.vercel.app/"
-          ></Project>
-          <Project
-            url=""
-            justify="flex-end"
-            imgUrl="../../matrix.png"
-            hoverTxt="Text-based RPG"
-          ></Project>
+          >
+            <Box width="100%" height="100%">
+              <img
+                style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                src={socialMedia}
+                alt="videoPlayer"
+              ></img>
+            </Box>
+          </Project>
+          <Project url="" justify="flex-end" hoverTxt="Text-based RPG">
+            <Box width="100%" height="100%">
+              <img
+                style={{ objectFit: "cover", width: "100%", height: "100%" }}
+                src={matrix}
+                alt="Matrix"
+              ></img>
+            </Box>
+          </Project>
         </Grid>
       </Box>
     </Grid>

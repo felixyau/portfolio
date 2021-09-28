@@ -11,17 +11,16 @@ import {
 import React from "react";
 
 interface CardsProps {
-  imgUrl: string;
   hoverTxt: string;
   justify?: GridJustification | undefined;
   url: string;
 }
 
 export const Project: React.FC<CardsProps> = ({
-  imgUrl,
   hoverTxt,
   justify = "flex-start",
-  url
+  url,
+  children
 }) => {
   const useStyles = makeStyles({
     container: {
@@ -40,6 +39,7 @@ export const Project: React.FC<CardsProps> = ({
     },
     card: {
       width: 310,
+      height: 310,
       transition: "opacity 0.5s",
       zIndex: 2,
     },
@@ -60,14 +60,9 @@ export const Project: React.FC<CardsProps> = ({
       <Box m={4}>
       <Link href={url}>
       <Box className={classes.container}>
-        <Card className={classes.card}>
-          <CardMedia
-            component="img"
-            alt="Contemplative Reptile"
-            height="300px"
-            image={`${imgUrl}`}
-          />
-        </Card>
+        <Box className={classes.card}>
+          {children}
+        </Box>
         <Box className={classes.hoverText}>
           <Typography variant="h6">{hoverTxt}</Typography>
         </Box>
