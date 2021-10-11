@@ -7,13 +7,18 @@ import {
   Typography,
 } from "@material-ui/core";
 import { grey } from "@material-ui/core/colors";
-import React from "react";
+import React, { useEffect } from "react";
 import { Project } from "./Project";
 import videoPlayer from "../../video-player.jpg";
 import matrix from "../../matrix.png";
 import socialMedia from "../../social-medias.jpg";
 
 export const Projects: React.FC = () => {
+  useEffect(()=>{
+    const newImage = new Image();
+    newImage.src = videoPlayer;
+  })
+
   const useStyles = makeStyles({
     card: {
       width: 320,
