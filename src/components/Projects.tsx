@@ -14,9 +14,13 @@ import matrix from "../../matrix.png";
 import socialMedia from "../../social-medias.jpg";
 
 export const Projects: React.FC = () => {
+  const images = [videoPlayer, matrix, socialMedia];
   useEffect(()=>{
-    const newImage = new Image();
-    newImage.src = videoPlayer;
+    images.forEach(image=> {
+      const newImage = new Image();
+      newImage.src = image;
+    })
+
   })
 
   const useStyles = makeStyles({
